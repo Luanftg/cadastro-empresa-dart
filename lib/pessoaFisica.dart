@@ -7,7 +7,14 @@ class PessoaFisica extends Pessoa {
       required super.endereco});
 
   @override
+  String toString() {
+    return '''
+CPF:            $documento
+Nome Completo:  $nomeIdentificador''';
+  }
+
+  @override
   void validarDocumento(String documento) {
-    // TODO: implement validarDocumento
+    if (documento.length != 11) {}
   }
 }

@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:cadastro_empresa/pessoa_model.dart';
 
 class PessoaJuridica extends Pessoa {
@@ -5,7 +6,7 @@ class PessoaJuridica extends Pessoa {
 
   PessoaJuridica(
       {required super.nomeIdentificador,
-      String? nomefantasia,
+      this.nomeFantasia,
       required super.documento,
       required super.endereco});
 
@@ -13,4 +14,10 @@ class PessoaJuridica extends Pessoa {
   void validarDocumento(String documento) {
     // TODO: implement validarDocumento
   }
+
+  @override
+  String toString() => '''
+CNPJ:           $documento
+Razão Social:   $nomeIdentificador
+Nome Fantasia:  $nomeFantasia''';
 }
