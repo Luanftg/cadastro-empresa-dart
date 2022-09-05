@@ -69,10 +69,12 @@ seguinte formatação:
       3. ``class`` Empresa
 2. Testes
    1. Estrutura das classes
-   2. pacotes: *Uuid*
+   2. pacotes: *Uuid* - gerador de ID
+   3. Estrutura de armazenamento de dados com ``File class``
 3. Implementação
 
 #### Referências
 
 - Bibliotecas utilizadas
 [pub.dev - Uuid](https://pub.dev/packages/uuid)
+[pub.dev - File class](https://api.dart.dev/stable/2.18.0/dart-io/File-class.html)

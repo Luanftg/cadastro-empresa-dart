@@ -1,11 +1,13 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:convert';
+
 import 'package:uuid/uuid.dart';
 
 import 'package:cadastro_empresa/endereco_model.dart';
 import 'package:cadastro_empresa/pessoa_model.dart';
 
 class Empresa {
-  String? _id;
+  String? id;
   String razaoSocial;
   String nomeFantasia;
   String cnpj;
@@ -15,6 +17,8 @@ class Empresa {
   Pessoa socio;
 
   Empresa({
+    required this.id,
+    required this.criadoEm,
     required this.razaoSocial,
     required this.nomeFantasia,
     required this.cnpj,
@@ -22,14 +26,14 @@ class Empresa {
     required this.telefone,
     required this.socio,
   }) {
-    _id = Uuid().v1();
+    id = Uuid().v1();
     criadoEm = DateTime.now();
   }
 
   @override
   String toString() {
     return '''
-ID: $_id
+ID: $id
 CNPJ: $cnpj     Data Cadastro: $criadoEm 
 Razão Social:   $razaoSocial
 Nome Fantasia:  $nomeFantasia 
@@ -39,4 +43,37 @@ $socio
 Endereço: $endereco
 ''';
   }
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'id': id,
+      'razaoSocial': razaoSocial,
+      'nomeFantasia': nomeFantasia,
+      'cnpj': cnpj,
+      'endereco': endereco.toMap(),
+      'telefone': telefone,
+      'criadoEm': criadoEm?.millisecondsSinceEpoch,
+      'socio': socio.toMap(),
+    };
+  }
+
+  factory Empresa.fromMap(Map<String, dynamic> map) {
+    return Empresa(
+      id: map['_id'] != null ? map['_id'] as String : null,
+      razaoSocial: map['razaoSocial'] as String,
+      nomeFantasia: map['nomeFantasia'] as String,
+      cnpj: map['cnpj'] as String,
+      endereco: Endereco.fromMap(map['endereco'] as Map<String, dynamic>),
+      telefone: map['telefone'] as String,
+      criadoEm: map['criadoEm'] != null
+          ? DateTime.fromMillisecondsSinceEpoch(map['criadoEm'] as int)
+          : null,
+      socio: Pessoa.fromMap(map['socio'] as Map<String, dynamic>),
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory Empresa.fromJson(String source) =>
+      Empresa.fromMap(json.decode(source) as Map<String, dynamic>);
 }

@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:cadastro_empresa/repositorio_local.dart';
 import 'package:cadastro_empresa/empresa_model.dart';
 import 'package:cadastro_empresa/endereco_model.dart';
 import 'package:cadastro_empresa/pessoaFisica.dart';
@@ -29,6 +32,8 @@ void main() {
   );
 
   var empresaLuan = Empresa(
+    id: Uuid().v1(),
+    criadoEm: DateTime.now(),
     razaoSocial: 'Luan Fonseca Produções',
     nomeFantasia: 'Luan Fonseca352',
     cnpj: '40242842000128',
@@ -38,6 +43,8 @@ void main() {
   );
 
   var empresaLuan2 = Empresa(
+    id: Uuid().v1(),
+    criadoEm: DateTime.now(),
     razaoSocial: 'Luan Gimenez Dança',
     nomeFantasia: 'Dança em Video',
     cnpj: '53478145000178',
@@ -46,7 +53,25 @@ void main() {
     socio: luanJuridico,
   );
 
-  print(empresaLuan);
-  print('\n');
-  print(empresaLuan2);
+  // print(empresaLuan);
+  // print('\n');
+  // print(empresaLuan2);
+
+  var dbPessoaFisica = File('./database/pessoa_fisica.json');
+  var dbPessoaJuridica = File('./database/pessoa_juridica.json');
+  var dbEmpresa = File('./database/empresa.json');
+
+  var daoPessoaFisica = RepositorioLocal(arquivo: dbPessoaFisica);
+  var daoPessoaJuridica = RepositorioLocal(arquivo: dbPessoaJuridica);
+  var daoEmpresa = RepositorioLocal(arquivo: dbEmpresa);
+
+  //daoPessoaFisica.encontrarTodos();
+  //daoPessoaJuridica.encontrarTodos();
+  daoEmpresa.encontrarTodos();
+  daoEmpresa.adicionar(empresaLuan2.toJson());
+  daoPessoaFisica.adicionar(luan.toJson());
+  daoPessoaJuridica.adicionar(luanJuridico.toJson());
+  //daoPessoaFisica.encontrarTodos();
+  //daoPessoaJuridica.encontrarTodos();
+  daoEmpresa.encontrarTodos();
 }
