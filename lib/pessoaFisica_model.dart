@@ -15,16 +15,13 @@ CPF:            $documento
 Nome Completo:  $nomeIdentificador''';
   }
 
-  @override
-  void validarDocumento(String documento) {
-    while (documento.length != 11 && int.parse(documento).isNaN) {
+  static String validarDocumento(String documento) {
+    int cpf = int.parse(documento);
+    while (documento.length != 11 || cpf.isNaN) {
       print(
           'CPF inválido. Informe uma sequência de 11 digitos sem caracteres especiais');
       documento = stdin.readLineSync()!;
     }
-
-    // if (documento.length != 11) {
-    //
-    // }
+    return '${documento.substring(0, 3)}.${documento.substring(3, 6)}.${documento.substring(6, 9)}-${documento.substring(9)}';
   }
 }

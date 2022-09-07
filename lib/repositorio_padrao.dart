@@ -12,18 +12,15 @@ class RepositorioPadrao implements DAO {
 
   @override
   void deletar(String id) {
-    listaEmpresas.forEach((element) {
-      if (element.id == id) {
-        listaEmpresas.removeWhere(
-          (element) => element.id == id,
-        );
-      }
-    });
+    listaEmpresas.removeWhere((element) => element.id == id);
+    print('Empresa de id: $id removida da lista de cadastro!');
   }
 
   @override
   void encontrarTodos() {
-    listaEmpresas.forEach(print);
+    listaEmpresas.isEmpty
+        ? print('A lista está vazia')
+        : listaEmpresas.forEach(print);
   }
 
   @override

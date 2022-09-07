@@ -1,4 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:io';
+
 import 'package:cadastro_empresa/pessoa_model.dart';
 
 class PessoaJuridica extends Pessoa {
@@ -11,8 +13,14 @@ class PessoaJuridica extends Pessoa {
       required super.endereco});
 
   @override
-  void validarDocumento(String documento) {
-    // TODO: implement validarDocumento
+  static String validarDocumento(String documento) {
+    int cnpj = int.parse(documento);
+    while (documento.length != 14 || cnpj.isNaN) {
+      print(
+          'CNPJ inválido. Informe uma sequência de 14 digitos sem caracteres especiais');
+      documento = stdin.readLineSync()!;
+    }
+    return '${documento.substring(0, 2)}.${documento.substring(2, 5)}.${documento.substring(5, 8)}/0001-${documento.substring(12)}';
   }
 
   @override

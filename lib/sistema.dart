@@ -1,10 +1,12 @@
 import 'dart:io';
-
+import 'dart:convert';
+import 'package:cadastro_empresa/pessoa_model.dart';
+import 'package:http/http.dart' as http;
 import 'package:cadastro_empresa/dao.dart';
 import 'package:cadastro_empresa/empresa_model.dart';
 import 'package:cadastro_empresa/endereco_model.dart';
-import 'package:cadastro_empresa/pessoaFisica.dart';
-import 'package:cadastro_empresa/pessoaJuridica.dart';
+import 'package:cadastro_empresa/pessoaFisica_model.dart';
+import 'package:cadastro_empresa/pessoaJuridica_model.dart';
 import 'package:uuid/uuid.dart';
 
 class Sistema {
@@ -14,8 +16,8 @@ class Sistema {
 
   Sistema({required this.repo});
 
-  void inicializar() {
-    print('Inicializado Sistema para Cadastro de Empresas');
+  Future<void> inicializar() async {
+    print('\n Inicializado Sistema para Cadastro de Empresas');
 
     do {
       menuPrincipal();
@@ -23,7 +25,7 @@ class Sistema {
 
       switch (escolha) {
         case 1:
-          menuGeralCadastro(1, 'CADASTRO');
+          await menuGeralCadastro(1, 'CADASTRO');
           break;
         case 2:
           repo.encontrarTodos();
@@ -41,7 +43,6 @@ class Sistema {
           break;
         default:
           erroEscolhaOpcao();
-          return;
       }
     } while (escolha != 5);
   }
@@ -61,7 +62,7 @@ class Sistema {
 [5] -> Encerramento
 ''');
 
-  void menuGeralCadastro(int escolha, String titulo) {
+  Future<void> menuGeralCadastro(int escolha, String titulo) async {
     print('''
 
 [Menu $titulo] : Informe uma opção para $titulo
@@ -71,7 +72,7 @@ class Sistema {
     escolha = int.parse(stdin.readLineSync()!);
     switch (escolha) {
       case 1:
-        cadastrarEmpresa(1);
+        await cadastrarEmpresa(1);
         break;
       case 2:
         cadastrarEmpresa(2);
@@ -82,27 +83,76 @@ class Sistema {
     }
   }
 
-  void cadastrarEmpresa(int escolha) {
-    print('Informe a Razão Social da Empresa:');
-    String razaoSocial = stdin.readLineSync()!;
-    print('Informe o nome fantasia da Empresa:');
-    String nomeFantasia = stdin.readLineSync()!;
-    print('Informe o CNPJ da Empresa:');
-    String cnpj = stdin.readLineSync()!;
-    print('Informe o Telefone da Empresa:');
-    String telefone = stdin.readLineSync()!;
-    print('Informe o logradouro da Empresa:');
-    String logradouro = stdin.readLineSync()!;
-    print('Informe o número da Empresa:');
-    int numero = int.parse(stdin.readLineSync()!);
-    print('Informe o complemento da Empresa:');
-    String complemento = stdin.readLineSync()!;
-    print('Informe o bairro da Empresa:');
-    String bairro = stdin.readLineSync()!;
-    print('Informe o estado da Empresa:');
-    String estado = stdin.readLineSync()!;
-    print('Informe o CEP da Empresa:');
-    String cep = stdin.readLineSync()!;
+  Future<void> cadastrarEmpresa(int escolha) async {
+    String razaoSocial = 'Razao Social';
+    String nomeFantasia = 'Nome Fantasia';
+    String cnpj = 'CNPJ';
+    String telefone = 'Telefone';
+    String cep = 'CEP';
+    String complemento = 'Complemento';
+    String logradouro = 'Logradouro';
+    String numero = "Número";
+    String bairro = 'Bairro';
+    String estado = 'Estado';
+    String nome = 'Nome';
+    String cpf = 'CPF';
+    String razaoSocialSocio = 'Razão Social do Sócio';
+    String nomeFantasiaSocio = 'Nome Fantasia do Sócio';
+    String cnpjSocio = 'CNPJ do Sócio';
+    String cidade = 'Cidade';
+
+    razaoSocial = funcAuxiliar(razaoSocial);
+    nomeFantasia = funcAuxiliar(nomeFantasia);
+    cnpj = funcAuxiliar(cnpj);
+    cnpj = PessoaJuridica.validarDocumento(cnpj);
+    // do {
+    //   razaoSocial = setRazaoSocial();
+    // } while (razaoSocial.isEmpty);
+    // do {
+    //   nomeFantasia = setNomeFantasia();
+    // } while (nomeFantasia.isEmpty);
+    // do {
+    //   cnpj = setCNPJ();
+    //   cnpj = PessoaJuridica.validarDocumento(cnpj);
+    // } while (cnpj.isEmpty);
+    do {
+      telefone = setTelefone();
+      telefone = Pessoa.validarTelefone(telefone);
+    } while (telefone.isEmpty);
+    do {
+      numero = setNumero();
+    } while (numero.isEmpty);
+    do {
+      complemento = setComplemento();
+    } while (complemento.isEmpty);
+
+    do {
+      cep = setCep();
+      var json = await fetch(cep, 'json');
+      if (json.isNotEmpty) {
+        logradouro = json['logradouro'];
+        bairro = json['bairro'];
+        estado = json['uf'];
+        cidade = json['localidade'];
+        telefone = '(${json['ddd']}) $telefone';
+        confirmaResultadoCep(json);
+      } else {
+        print(
+            "Erro na busca do Edereço pelo CEP. Informe os campos manuealmente.");
+        do {
+          logradouro = setLogradouro();
+        } while (logradouro.isEmpty);
+        do {
+          bairro = setBairro();
+        } while (bairro.isEmpty);
+        do {
+          estado = setEstado();
+        } while (estado.isEmpty);
+        do {
+          cidade = setCidade();
+        } while (cidade.isEmpty);
+      }
+    } while (cep.isEmpty);
 
     Endereco endereco = Endereco(
       logradouro: logradouro,
@@ -111,13 +161,17 @@ class Sistema {
       bairo: bairro,
       estado: estado,
       cep: cep,
+      cidade: cidade,
     );
 
     if (escolha == 1) {
-      print('Infrome o nome do sócio responsável');
-      String nome = stdin.readLineSync()!;
-      print('Infrome o cpf do sócio responsável');
-      String cpf = stdin.readLineSync()!;
+      do {
+        nome = setNome();
+      } while (nome.isEmpty);
+      do {
+        cpf = setCPF();
+        cpf = PessoaFisica.validarDocumento(cpf);
+      } while (cpf.isEmpty);
 
       PessoaFisica pf = PessoaFisica(
         documento: cpf,
@@ -135,15 +189,22 @@ class Sistema {
         telefone: telefone,
         socio: pf,
       );
-      repo.adicionar(novaEmpresa);
-      print('Empresa cadastrada com sucesso!');
+      try {
+        repo.adicionar(novaEmpresa);
+        print('Empresa cadastrada com sucesso!');
+      } catch (e) {
+        print(e);
+      }
     } else if (escolha == 2) {
-      print('Infrome a Razão Social do sócio responsável');
-      String razaoSocialSocio = stdin.readLineSync()!;
-      print('Infrome o nomeFantasia do sócio responsável');
-      String nomeFantasiaSocio = stdin.readLineSync()!;
-      print('Infrome o cnpj do sócio responsável');
-      String cnpjSocio = stdin.readLineSync()!;
+      do {
+        razaoSocialSocio = setRazaoSocialSocio();
+      } while (razaoSocialSocio.isEmpty);
+      do {
+        nomeFantasiaSocio = setNomeFantasiaSocio();
+      } while (nomeFantasiaSocio.isEmpty);
+      do {
+        cnpjSocio = setCnpjSocio();
+      } while (cnpjSocio.isEmpty);
 
       PessoaJuridica pj = PessoaJuridica(
         documento: cnpjSocio,
@@ -176,4 +237,127 @@ class Sistema {
 
   void erroEscolhaOpcao() =>
       print('[ERRO!] -> Você deve informar uma das opções válidas.');
+}
+
+String setRazaoSocial() {
+  print('Informe a Razão Social da Empresa:');
+  return stdin.readLineSync()!;
+}
+
+String setNomeFantasia() {
+  print('Informe o nome fantasia da Empresa:');
+  return stdin.readLineSync()!;
+}
+
+String setCNPJ() {
+  print('Informe o CNPJ da Empresa:');
+  return stdin.readLineSync()!;
+}
+
+String setTelefone() {
+  print('Informe o Telefone da Empresa:');
+  return stdin.readLineSync()!;
+}
+
+String setCep() {
+  print('Informe o Cep da Empresa:');
+  return stdin.readLineSync()!;
+}
+
+void confirmaResultadoCep(Map<dynamic, dynamic> json) {
+  print('''
+
+Confirme as informasções para o CEP: ${json['cep']}
+Logradouro: ${json['logradouro']}
+Bairro: ${json['bairro']}
+Cidade: ${json['localidade']}
+Estado: ${json['uf']}
+
+Informe:
+[1] -> Para confirmar.
+[2] -> Informar os campos manualmente
+''');
+  String cep = stdin.readLineSync()!;
+  switch (cep) {
+    case '1':
+      break;
+    case '2':
+      json.clear();
+      return;
+    default:
+      print(
+          'Você deve informar 1 para confirmar os dados do Endereço ou 2 para inseri-los manualmente.');
+  }
+}
+
+String setComplemento() {
+  print('Informe um complemento para o endereço da Empresa:');
+  return stdin.readLineSync()!;
+}
+
+String setLogradouro() {
+  print('Informe o logradouro da Empresa:');
+  return stdin.readLineSync()!;
+}
+
+String setNumero() {
+  print('Informe o número do Endereço da Empresa:');
+  return stdin.readLineSync()!;
+}
+
+String setBairro() {
+  print('Informe o bairro da Empresa:');
+  return stdin.readLineSync()!;
+}
+
+String setEstado() {
+  print('Informe a unidade federativa da Empresa:');
+  return stdin.readLineSync()!;
+}
+
+String setNome() {
+  print('Infrome o nome do sócio responsável');
+  return stdin.readLineSync()!;
+}
+
+String setCPF() {
+  print('Infrome o cpf do sócio responsável');
+  return stdin.readLineSync()!;
+}
+
+String setRazaoSocialSocio() {
+  print('Informe a Razão Social do sócio responsável');
+  return stdin.readLineSync()!;
+}
+
+String setNomeFantasiaSocio() {
+  print('Infrome o Nome Fantasia do sócio responsável');
+  return stdin.readLineSync()!;
+}
+
+String setCnpjSocio() {
+  print('Infrome o cnpj do sócio responsável');
+  return stdin.readLineSync()!;
+}
+
+String setCidade() {
+  print('Informe a cidade em que a Empresa esta sediada');
+  return stdin.readLineSync()!;
+}
+
+String funcAuxiliar(String parametro) {
+  do {
+    print('Informe o $parametro');
+    parametro = stdin.readLineSync()!;
+  } while (parametro.isEmpty);
+  return parametro;
+}
+
+Future<Map> fetch(String cep, String formato) async {
+  var authority = 'viacep.com.br';
+  var unencodedPath = 'ws/$cep/$formato';
+  var url = Uri.https(authority, unencodedPath);
+  var response = await http.get(url);
+  var json = jsonDecode(response.body);
+  return json;
 }

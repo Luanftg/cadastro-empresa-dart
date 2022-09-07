@@ -3,20 +3,20 @@ import 'dart:io';
 import 'package:cadastro_empresa/repositorio_local.dart';
 import 'package:cadastro_empresa/empresa_model.dart';
 import 'package:cadastro_empresa/endereco_model.dart';
-import 'package:cadastro_empresa/pessoaFisica.dart';
-import 'package:cadastro_empresa/pessoaJuridica.dart';
+import 'package:cadastro_empresa/pessoaFisica_model.dart';
+import 'package:cadastro_empresa/pessoaJuridica_model.dart';
 import 'package:uuid/uuid.dart';
 
 void main() {
   print('\n');
   var enderecoLuan = Endereco(
-    logradouro: 'Avendia Rui Barbosa',
-    numero: 2053,
-    complemento: 'casa04',
-    bairo: 'Santana',
-    estado: 'São Paulo',
-    cep: '12211-105',
-  );
+      logradouro: 'Avendia Rui Barbosa',
+      numero: '2053',
+      complemento: 'casa04',
+      bairo: 'Santana',
+      estado: 'São Paulo',
+      cep: '12211-105',
+      cidade: 'São José dos Campos');
 
   var luan = PessoaFisica(
     nomeIdentificador: 'Luan Fonseca',
