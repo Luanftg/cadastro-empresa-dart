@@ -2,8 +2,8 @@ import 'package:cadastro_empresa/empresa_model.dart';
 
 abstract class DAO {
   void encontrarUm(String id) {}
-  void encontrarTodos() async {}
-  void deletar(String id) async {}
+  Future<void> encontrarTodos() async {}
+  Future<void> deletar(String id) async {}
   void adicionar(Empresa empresa) {}
 }
 

@@ -14,23 +14,26 @@ class RepositorioLocal implements DAO {
   });
 
   @override
-  void adicionar(Empresa content) async {
+  Future<void> adicionar(Empresa content) async {
     var sink = arquivo.openWrite(mode: FileMode.append);
     registro++;
-    //sink.write('PESSOA FISICA N° $registro: $content \n');
     sink.write('${content.toString()} \n');
     sink.close();
   }
 
   @override
-  void deletar(String id) async {
+  Future<void> deletar(String id) async {
     Stream<String> linhas =
         arquivo.openRead().transform(utf8.decoder).transform(LineSplitter());
+    var sink = arquivo.openWrite(mode: FileMode.append);
     try {
       await for (var linha in linhas) {
         if (linha.contains(id)) {
-          linha.replaceRange(0, null, ' ');
-          print('${linha.length} removida!');
+          for (int i = 0; i <= 8; i++) {
+            sink.write('');
+            sink.close();
+          }
+          print('\n [removida] $linha');
         }
       }
       print('File is now closed.');
@@ -41,27 +44,27 @@ class RepositorioLocal implements DAO {
   }
 
   @override
-  void encontrarTodos() async {
+  Future<void> encontrarTodos() async {
     Stream<String> linhas =
         arquivo.openRead().transform(utf8.decoder).transform(LineSplitter());
     try {
       await for (var linha in linhas) {
-        print('$linha: ${linha.length} characters');
+        print(linha);
       }
-      print('File is now closed.');
+      print('Arquivo fechado.');
     } catch (e) {
-      print('Error: $e');
+      print('[Error]: $e');
     }
   }
 
   @override
-  void encontrarUm(String id) async {
+  Future<void> encontrarUm(String id) async {
     Stream<String> linhas =
         arquivo.openRead().transform(utf8.decoder).transform(LineSplitter());
     try {
       await for (var linha in linhas) {
         if (linha.contains(id)) {
-          print('$linha: ${linha.length} characters');
+          print(linha);
         }
       }
       print('File is now closed.');
