@@ -27,5 +27,7 @@ class PessoaJuridica extends Pessoa {
   String toString() => '''
 CNPJ:           $documento
 Razão Social:   $nomeIdentificador
-Nome Fantasia:  $nomeFantasia''';
+Nome Fantasia:  $nomeFantasia
+Endereço:       $endereco
+''';
 }

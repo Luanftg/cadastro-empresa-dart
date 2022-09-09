@@ -12,7 +12,9 @@ class PessoaFisica extends Pessoa {
   String toString() {
     return '''
 CPF:            $documento
-Nome Completo:  $nomeIdentificador''';
+Nome Completo:  $nomeIdentificador
+Endereço:       $endereco;
+''';
   }
 
   static String validarDocumento(String documento) {

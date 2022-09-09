@@ -11,13 +11,13 @@ class RepositorioPadrao implements DAO {
   }
 
   @override
-  void deletar(String id) {
+  Future<void> deletar(String id) async {
     listaEmpresas.removeWhere((element) => element.id == id);
     print('Empresa de id: $id removida da lista de cadastro!');
   }
 
   @override
-  void encontrarTodos() {
+  Future<void> encontrarTodos() async {
     listaEmpresas.isEmpty
         ? print('A lista está vazia')
         : listaEmpresas.forEach(print);
@@ -26,7 +26,7 @@ class RepositorioPadrao implements DAO {
   @override
   void encontrarUm(String id) {
     for (int index = 0; index < listaEmpresas.length; index++) {
-      listaEmpresas[index].id == id
+      listaEmpresas.contains(id)
           ? print(listaEmpresas[index])
           : print('Empresa com id $id não encontrada na lista');
     }
