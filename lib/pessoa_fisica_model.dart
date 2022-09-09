@@ -3,17 +3,20 @@ import 'dart:io';
 import 'package:cadastro_empresa/pessoa_model.dart';
 
 class PessoaFisica extends Pessoa {
+  String telefone;
   PessoaFisica(
       {required super.nomeIdentificador,
       required super.documento,
-      required super.endereco});
+      required super.endereco,
+      required this.telefone});
 
   @override
   String toString() {
     return '''
 CPF:            $documento
 Nome Completo:  $nomeIdentificador
-Endereço:       $endereco;
+Endereço:       $endereco
+Telefone:       
 ''';
   }
 

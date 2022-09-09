@@ -18,17 +18,46 @@ class RepositorioPadrao implements DAO {
 
   @override
   Future<void> encontrarTodos() async {
-    listaEmpresas.isEmpty
-        ? print('A lista está vazia')
-        : listaEmpresas.forEach(print);
+    if (listaEmpresas.isEmpty) {
+      print('A lista está vazia');
+    } else {
+      listaEmpresas.sort(((a, b) => a.razaoSocial.compareTo(b.razaoSocial)));
+      listaEmpresas.forEach(print);
+    }
   }
 
   @override
-  void encontrarUm(String id) {
+  void encontrarUm(String documento) {
     for (int index = 0; index < listaEmpresas.length; index++) {
-      listaEmpresas.contains(id)
+      listaEmpresas.any((element) => element.socio.documento == documento)
           ? print(listaEmpresas[index])
-          : print('Empresa com id $id não encontrada na lista');
+          : print('Empresa com documento: $documento não encontrada na lista');
     }
   }
 }
+
+
+// void encontraEmpresaPorCNPJ() {
+//     for (int index = 0; index < listaEmpresas.length; index++) {
+//     listaEmpresas.any((element) => element.socio.documento == documento)
+//         ? print(listaEmpresas[index])
+//         : print('Empresa com documento: $documento não encontrada na lista');
+//   } 
+// }
+   
+//   //   String documento, List<Empresa> listaEmpresas) {
+//   // for (int index = 0; index < listaEmpresas.length; index++) {
+//   //   listaEmpresas.any((element) => element.cnpj == documento)
+//   //       ? print(listaEmpresas[index])
+//   //       : print('Empresa com documento: $documento não encontrada na lista');
+//   // }
+
+// }
+// void encontraEmpresaDocumento(
+//     String documento, List<Empresa> listaEmpresas) {
+//   for (int index = 0; index < listaEmpresas.length; index++) {
+//     listaEmpresas.any((element) => element.socio.documento == documento)
+//         ? print(listaEmpresas[index])
+//         : print('Empresa com documento: $documento não encontrada na lista');
+//   }
+// }

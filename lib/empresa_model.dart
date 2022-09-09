@@ -28,14 +28,14 @@ class Empresa {
   @override
   String toString() {
     return '''
-ID: $id 
-RazaoSocial: $razaoSocial 
-nomeFantasia: $nomeFantasia
-CNPJ: $cnpj
-Endereco: $endereco
-Telefone: $telefone
-CriadoEm: $criadoEm
-Socio: $socio
+ID: $id
+CNPJ: $cnpj     Data Cadastro: $criadoEm 
+Razão Social:   $razaoSocial
+Nome Fantasia:  $nomeFantasia
+Endereço: $endereco
+Telefone:       $telefone
+SÓCIO
+$socio
     ''';
   }
 

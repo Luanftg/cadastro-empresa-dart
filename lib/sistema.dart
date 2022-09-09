@@ -5,8 +5,8 @@ import 'package:http/http.dart' as http;
 import 'package:cadastro_empresa/dao.dart';
 import 'package:cadastro_empresa/empresa_model.dart';
 import 'package:cadastro_empresa/endereco_model.dart';
-import 'package:cadastro_empresa/pessoaFisica_model.dart';
-import 'package:cadastro_empresa/pessoaJuridica_model.dart';
+import 'package:cadastro_empresa/pessoa_fisica_model.dart';
+import 'package:cadastro_empresa/pessoa_juridica_model.dart';
 import 'package:uuid/uuid.dart';
 
 class Sistema {
@@ -36,7 +36,9 @@ class Sistema {
           await repo.deletar(id);
           break;
         case '4':
-          menuGeralCadastro('4', 'DELEÇÃO');
+          String documento = funcAuxiliar(
+              "Informe o CPF ou CNPJ do Sócio para buscar uma Empresa:");
+          repo.encontrarUm(documento);
           break;
         case '5':
           encerrar();
@@ -58,8 +60,8 @@ class Sistema {
 [Menu Principal] : Informe a opção desejada
 [1] -> Cadastro
 [2] -> Visualização
+[4] -> Busca por CNPJ da empresa
 [3] -> Deleção
-[4] -> Atualização
 [5] -> Encerramento
 ''');
   }
@@ -86,47 +88,48 @@ class Sistema {
   }
 
   Future<void> cadastrarEmpresa(String escolha) async {
-    String razaoSocial = 'Razao Social';
-    String nomeFantasia = 'Nome Fantasia';
-    String cnpj = 'CNPJ';
-    String telefone = 'Telefone';
-    String cep = 'CEP';
-    String complemento = 'Complemento';
-    String logradouro = 'Logradouro';
-    String numero = "Número";
-    String bairro = 'Bairro';
-    String estado = 'Estado';
-    String nome = 'Nome';
-    String cpf = 'CPF';
-    String razaoSocialSocio = 'Razão Social do Sócio';
-    String nomeFantasiaSocio = 'Nome Fantasia do Sócio';
-    String cnpjSocio = 'CNPJ do Sócio';
-    String cidade = 'Cidade';
+    String razaoSocial = '';
+    String nomeFantasia = '';
+    String cnpj = '';
+    String telefone = '';
+    String cep = '';
+    String cepSocio = '';
+    String complemento = '';
+    String logradouro = '';
+    String numero = "";
+    String bairro = '';
+    String estado = '';
+    String nome = '';
+    String cpf = '';
+    String cpfSocio = '';
+    String razaoSocialSocio = '';
+    String nomeFantasiaSocio = '';
+    String cnpjSocio = '';
+    String cidade = '';
     var mapDeCepEmJson;
     String resultadoConfirmaCep = '';
+    String telefoneSocio = '';
 
-    razaoSocial = funcAuxiliar(razaoSocial);
-    nomeFantasia = funcAuxiliar(nomeFantasia);
+    razaoSocial = funcAuxiliar('Informe a Razão Social da Empresa:');
+    nomeFantasia = funcAuxiliar('Informe o Nome Fantasia da Empresa:');
 
-    cnpj = funcAuxiliar(cnpj);
+    cnpj = funcAuxiliar('Informe o CNPJ da Empresa');
     cnpj = PessoaJuridica.validarDocumento(cnpj);
 
-    telefone = funcAuxiliar(telefone);
+    telefone = funcAuxiliar('Informe o Telefone da Empresa:');
     telefone = Pessoa.validarTelefone(telefone);
 
-    numero = funcAuxiliar(numero);
-    complemento = funcAuxiliar(complemento);
-    cep = funcAuxiliar(cep);
+    cep = funcAuxiliar("Informe o CEP da Empresa:");
 
     try {
       mapDeCepEmJson = await fetch(cep, 'json');
       exibeResultadoCep(mapDeCepEmJson);
       resultadoConfirmaCep = confirmaResultadoCep();
       if (resultadoConfirmaCep == '2') {
-        logradouro = funcAuxiliar(logradouro);
-        bairro = funcAuxiliar(bairro);
-        estado = funcAuxiliar(estado);
-        cidade = funcAuxiliar(cidade);
+        logradouro = funcAuxiliar('Informe o Logradouro da Empresa:');
+        bairro = funcAuxiliar('Informe o Bairro da Empresa:');
+        estado = funcAuxiliar('Informe a Unidade Federativa da Empresa:');
+        cidade = funcAuxiliar('Informe a Cidade sede da Empresa');
       } else {
         logradouro = mapDeCepEmJson['logradouro'];
         bairro = mapDeCepEmJson['bairro'];
@@ -139,6 +142,10 @@ class Sistema {
       resultadoConfirmaCep == '2';
     }
 
+    numero = funcAuxiliar('Informe o Número de Endereço da Empresa:');
+    complemento =
+        funcAuxiliar('Informe um complemento para o Endereço da Empresa:');
+
     Endereco endereco = Endereco(
       logradouro: logradouro,
       numero: numero,
@@ -149,16 +156,51 @@ class Sistema {
       cidade: cidade,
     );
 
+    print("\nCadastro do Sócio da Empresa");
+    telefoneSocio = funcAuxiliar('Informe o Telefone da Empresa:');
+    telefoneSocio = Pessoa.validarTelefone(telefone);
+    cep = funcAuxiliar("Informe o CEP do Sócio:");
+
+    try {
+      mapDeCepEmJson = await fetch(cep, 'json');
+      exibeResultadoCep(mapDeCepEmJson);
+      resultadoConfirmaCep = confirmaResultadoCep();
+      if (resultadoConfirmaCep == '2') {
+        logradouro = funcAuxiliar('Informe o Logradouro do Sócio:');
+        bairro = funcAuxiliar('Informe o Bairro do Sócio');
+        estado = funcAuxiliar('Informe a Unidade Federativa do Sócio:');
+        cidade = funcAuxiliar('Informe a Cidade do Sócio:');
+      } else {
+        logradouro = mapDeCepEmJson['logradouro'];
+        bairro = mapDeCepEmJson['bairro'];
+        estado = mapDeCepEmJson['uf'];
+        cidade = mapDeCepEmJson['localidade'];
+        telefone = '(${mapDeCepEmJson['ddd']}) $telefone';
+      }
+    } catch (e) {
+      print('Erro $e na chamada da Api. Informe os Campos manualmente.');
+      resultadoConfirmaCep == '2';
+    }
+
+    Endereco enderecoSocio = Endereco(
+      logradouro: logradouro,
+      numero: numero,
+      bairo: bairro,
+      estado: estado,
+      cep: cep,
+      cidade: cidade,
+    );
+
     if (escolha == '1') {
-      nome = funcAuxiliar(nome);
-      cpf = funcAuxiliar(cpf);
+      nome = funcAuxiliar('Informe o Nome do Sócio da Empresa');
+      cpf = funcAuxiliar('Informe o CPF do Sócio da Empresa');
       cpf = PessoaFisica.validarDocumento(cpf);
 
       PessoaFisica pf = PessoaFisica(
-        documento: cpf,
-        nomeIdentificador: nome,
-        endereco: endereco,
-      );
+          documento: cpf,
+          nomeIdentificador: nome,
+          endereco: enderecoSocio,
+          telefone: telefoneSocio);
 
       Empresa novaEmpresa = Empresa(
         id: Uuid().v1(),
@@ -173,22 +215,22 @@ class Sistema {
 
       try {
         repo.adicionar(novaEmpresa);
-        print('Empresa cadastrada com sucesso!');
+        print('\nEmpresa cadastrada com sucesso!');
       } catch (e) {
         print(e);
       }
     } else if (escolha == '2') {
       razaoSocialSocio = funcAuxiliar(razaoSocialSocio);
       nomeFantasiaSocio = funcAuxiliar(nomeFantasiaSocio);
-      cnpjSocio = funcAuxiliar(cnpjSocio);
+      cnpjSocio = funcAuxiliar('Informe o CNPJ do Sócio:');
       cnpjSocio = PessoaJuridica.validarDocumento(cnpjSocio);
 
       PessoaJuridica pj = PessoaJuridica(
-        documento: cnpjSocio,
-        endereco: endereco,
-        nomeIdentificador: razaoSocialSocio,
-        nomeFantasia: nomeFantasiaSocio,
-      );
+          documento: cnpjSocio,
+          endereco: enderecoSocio,
+          nomeIdentificador: razaoSocialSocio,
+          nomeFantasia: nomeFantasiaSocio,
+          telefone: telefoneSocio);
 
       Empresa novaEmpresa = Empresa(
         id: Uuid().v1(),
@@ -244,9 +286,10 @@ Informe:
   return resultadoConfirmaCep;
 }
 
-String funcAuxiliar(String parametro) {
+String funcAuxiliar(String mensagem) {
+  String parametro;
   do {
-    print('Informe o $parametro');
+    print(mensagem);
     parametro = stdin.readLineSync()!;
   } while (parametro.isEmpty);
   return parametro;

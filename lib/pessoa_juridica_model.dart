@@ -5,14 +5,15 @@ import 'package:cadastro_empresa/pessoa_model.dart';
 
 class PessoaJuridica extends Pessoa {
   String? nomeFantasia;
+  String telefone;
 
   PessoaJuridica(
       {required super.nomeIdentificador,
       this.nomeFantasia,
       required super.documento,
-      required super.endereco});
+      required super.endereco,
+      required this.telefone});
 
-  @override
   static String validarDocumento(String documento) {
     int cnpj = int.parse(documento);
     while (documento.length != 14 || cnpj.isNaN) {

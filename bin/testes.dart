@@ -3,8 +3,8 @@ import 'dart:io';
 import 'package:cadastro_empresa/repositorio_local.dart';
 import 'package:cadastro_empresa/empresa_model.dart';
 import 'package:cadastro_empresa/endereco_model.dart';
-import 'package:cadastro_empresa/pessoaFisica_model.dart';
-import 'package:cadastro_empresa/pessoaJuridica_model.dart';
+import 'package:cadastro_empresa/pessoa_fisica_model.dart';
+import 'package:cadastro_empresa/pessoa_juridica_model.dart';
 import 'package:uuid/uuid.dart';
 
 void main() {
@@ -19,17 +19,17 @@ void main() {
       cidade: 'São José dos Campos');
 
   var luan = PessoaFisica(
-    nomeIdentificador: 'Luan Fonseca',
-    documento: '35214200862',
-    endereco: enderecoLuan,
-  );
+      nomeIdentificador: 'Luan Fonseca',
+      documento: '35214200862',
+      endereco: enderecoLuan,
+      telefone: '997213383');
 
   var luanJuridico = PessoaJuridica(
-    nomeIdentificador: 'Luan Fonseca 35214200862',
-    nomeFantasia: 'MEI do Luan Fonseca',
-    documento: '40245842000128',
-    endereco: enderecoLuan,
-  );
+      nomeIdentificador: 'Luan Fonseca 35214200862',
+      nomeFantasia: 'MEI do Luan Fonseca',
+      documento: '40245842000128',
+      endereco: enderecoLuan,
+      telefone: '12997213383');
 
   var empresaLuan = Empresa(
     id: Uuid().v1(),

@@ -28,12 +28,12 @@ Toda *empresa* nesse sistema deve ter um sócio associado a ela, que pode ser um
 
 O sistema ao ser executado deve oferecer as seguintes opções:
 
-- [ ] Cadastrar uma nova empresa;
+- [x] Cadastrar uma nova empresa;
 - [ ] Buscar Empresa cadastrada por CNPJ;
 - [ ] Buscar Empresa por CPF/CNPJ do Sócio;
-- [ ] Listar Empresas cadastradas em ordem alfabética (baseado na Razão Social);
-- [ ] Excluir uma empresa;
-- [ ] Sair.
+- [x] Listar Empresas cadastradas em ordem alfabética (baseado na Razão Social);
+- [x] Excluir uma empresa;
+- [x] Sair.
 
 ## Requisitos
 
@@ -41,15 +41,15 @@ O sistema ao ser executado deve oferecer as seguintes opções:
 documento (CPF/CNPJ);
 - [x] O programa deve ser criado considerando os recursos disponíveis da
 Orientação à Objetos e boas práticas;
-- [ ] O programa deve ter no mínimo uma herança;
+- [x] O programa deve ter no mínimo uma herança;
 - [x] CPF e CNPJ são do tipo String, mas o input do usuário será apenas
 números;
 - [x] Telefone é do tipo String, mas o input do usuário será apenas
 números, ex.: 11987654321;
 - [x] CEP é do tipo String, mas o input do usuário será apenas números;
-- [ ] O ID deve ser único, para cada Empresa cadastrada;
-- [ ] O horário de cadastro deve ser obtido automaticamente pelo sistema;
-- [ ] A impressão do conteúdo de uma empresa deve atender no mínimo a
+- [x] O ID deve ser único, para cada Empresa cadastrada;
+- [x] O horário de cadastro deve ser obtido automaticamente pelo sistema;
+- [x] A impressão do conteúdo de uma empresa deve atender no mínimo a
 seguinte formatação:
 
 ![image](https://i.imgur.com/rxxhn4U.png)
