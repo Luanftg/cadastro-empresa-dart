@@ -76,5 +76,6 @@ seguinte formatação:
 #### Referências
 
 - Bibliotecas utilizadas
-[pub.dev - Uuid](https://pub.dev/packages/uuid)
-[pub.dev - File class](https://api.dart.dev/stable/2.18.0/dart-io/File-class.html)
+  - [pub.dev - Uuid](https://pub.dev/packages/uuid)
+  - [pub.dev - File class](https://api.dart.dev/stable/2.18.0/dart-io/File-class.html)
+  - [4devs](https://www.4devs.com.br/)

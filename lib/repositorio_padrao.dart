@@ -28,36 +28,10 @@ class RepositorioPadrao implements DAO {
 
   @override
   void encontrarUm(String documento) {
-    for (int index = 0; index < listaEmpresas.length; index++) {
-      listaEmpresas.any((element) => element.socio.documento == documento)
-          ? print(listaEmpresas[index])
-          : print('Empresa com documento: $documento não encontrada na lista');
-    }
+    listaEmpresas.forEach((element) {
+      var lista =
+          (listaEmpresas.where((element) => element.cnpj == documento)).first;
+      print(lista);
+    });
   }
 }
-
-
-// void encontraEmpresaPorCNPJ() {
-//     for (int index = 0; index < listaEmpresas.length; index++) {
-//     listaEmpresas.any((element) => element.socio.documento == documento)
-//         ? print(listaEmpresas[index])
-//         : print('Empresa com documento: $documento não encontrada na lista');
-//   } 
-// }
-   
-//   //   String documento, List<Empresa> listaEmpresas) {
-//   // for (int index = 0; index < listaEmpresas.length; index++) {
-//   //   listaEmpresas.any((element) => element.cnpj == documento)
-//   //       ? print(listaEmpresas[index])
-//   //       : print('Empresa com documento: $documento não encontrada na lista');
-//   // }
-
-// }
-// void encontraEmpresaDocumento(
-//     String documento, List<Empresa> listaEmpresas) {
-//   for (int index = 0; index < listaEmpresas.length; index++) {
-//     listaEmpresas.any((element) => element.socio.documento == documento)
-//         ? print(listaEmpresas[index])
-//         : print('Empresa com documento: $documento não encontrada na lista');
-//   }
-// }
