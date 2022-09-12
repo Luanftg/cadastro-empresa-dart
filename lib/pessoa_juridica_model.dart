@@ -30,5 +30,6 @@ CNPJ:           $documento
 Razão Social:   $nomeIdentificador
 Nome Fantasia:  $nomeFantasia
 Endereço:       $endereco
+Telefone:       $telefone
 ''';
 }

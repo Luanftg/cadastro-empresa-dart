@@ -16,7 +16,7 @@ class PessoaFisica extends Pessoa {
 CPF:            $documento
 Nome Completo:  $nomeIdentificador
 Endereço:       $endereco
-Telefone:       
+Telefone:       $telefone
 ''';
   }
 

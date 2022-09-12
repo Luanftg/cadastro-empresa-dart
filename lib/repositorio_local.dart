@@ -17,7 +17,7 @@ class RepositorioLocal implements DAO {
   Future<void> adicionar(Empresa content) async {
     var sink = arquivo.openWrite(mode: FileMode.append);
     registro++;
-    sink.write('${content.toString()} \n');
+    sink.write('\n ${content.toJson()} \n');
     sink.close();
   }
 
