@@ -1,13 +1,14 @@
 import 'dart:io';
-import 'package:cadastro_empresa/cepApi.dart';
-import 'package:cadastro_empresa/dao.dart';
-import 'package:cadastro_empresa/empresa_model.dart';
-import 'package:cadastro_empresa/pessoa_fisica_model.dart';
-import 'package:cadastro_empresa/pessoa_juridica_model.dart';
-import 'package:cadastro_empresa/pessoa_model.dart';
-import 'package:cadastro_empresa/sistema_controlador.dart';
-import 'package:cadastro_empresa/sistema_io.dart';
+import 'package:cadastro_empresa/camadas/dados/externos/cepApi.dart';
+import 'package:cadastro_empresa/camadas/dados/dao.dart';
+import 'package:cadastro_empresa/camadas/apresentacao/sistema_controlador.dart';
+import 'package:cadastro_empresa/camadas/apresentacao/sistema_io.dart';
 import 'package:uuid/uuid.dart';
+
+import 'camadas/dominio/entidades/empresa_entidade.dart';
+import 'camadas/dominio/entidades/pessoa_entidade.dart';
+import 'camadas/dominio/entidades/pessoa_fisica_entidade.dart';
+import 'camadas/dominio/entidades/pessoa_juridica_entidade.dart';
 
 class Sistema {
   static Enum? escolha;

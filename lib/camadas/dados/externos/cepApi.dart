@@ -1,7 +1,7 @@
 import 'dart:convert';
-import 'dart:io';
-import 'package:cadastro_empresa/endereco_model.dart';
 import 'package:http/http.dart' as http;
+
+import '../../dominio/entidades/endereco_entidade.dart';
 
 class CepApi {
   static final baseUrlViaCep = 'viacep.com.br';

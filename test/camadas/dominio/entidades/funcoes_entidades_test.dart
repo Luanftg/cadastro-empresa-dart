@@ -1,6 +1,6 @@
-import 'package:cadastro_empresa/pessoa_fisica_model.dart';
-import 'package:cadastro_empresa/pessoa_juridica_model.dart';
-import 'package:cadastro_empresa/pessoa_model.dart';
+import 'package:cadastro_empresa/camadas/dominio/entidades/pessoa_entidade.dart';
+import 'package:cadastro_empresa/camadas/dominio/entidades/pessoa_fisica_entidade.dart';
+import 'package:cadastro_empresa/camadas/dominio/entidades/pessoa_juridica_entidade.dart';
 import 'package:test/expect.dart';
 import 'package:test/scaffolding.dart';
 

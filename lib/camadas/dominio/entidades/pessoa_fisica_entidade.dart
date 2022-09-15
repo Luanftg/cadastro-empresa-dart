@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:cadastro_empresa/pessoa_model.dart';
+import 'package:cadastro_empresa/camadas/dominio/entidades/pessoa_entidade.dart';
 
 class PessoaFisica extends Pessoa {
   String telefone;

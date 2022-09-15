@@ -1,7 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:io';
 
-import 'package:cadastro_empresa/pessoa_model.dart';
+import 'package:cadastro_empresa/camadas/dominio/entidades/pessoa_entidade.dart';
 
 class PessoaJuridica extends Pessoa {
   String? nomeFantasia;

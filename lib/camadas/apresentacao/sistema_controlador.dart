@@ -1,7 +1,7 @@
-import 'package:cadastro_empresa/sistema_io.dart';
+import 'package:cadastro_empresa/camadas/apresentacao/sistema_io.dart';
 
-import 'cepApi.dart';
-import 'endereco_model.dart';
+import '../dados/externos/cepApi.dart';
+import '../dominio/entidades/endereco_entidade.dart';
 
 class SistemaControlador {
   static Future<Endereco> atribuiEndereco() async {

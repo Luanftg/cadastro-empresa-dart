@@ -1,12 +1,14 @@
 import 'dart:io';
-import 'package:cadastro_empresa/cepApi.dart';
-import 'package:cadastro_empresa/pessoa_model.dart';
-import 'package:cadastro_empresa/dao.dart';
-import 'package:cadastro_empresa/empresa_model.dart';
-import 'package:cadastro_empresa/endereco_model.dart';
-import 'package:cadastro_empresa/pessoa_fisica_model.dart';
-import 'package:cadastro_empresa/pessoa_juridica_model.dart';
-import 'package:cadastro_empresa/sistema_io.dart';
+import 'package:cadastro_empresa/camadas/dados/externos/cepApi.dart';
+
+import 'package:cadastro_empresa/camadas/dados/dao.dart';
+
+import 'package:cadastro_empresa/camadas/apresentacao/sistema_io.dart';
+import 'package:cadastro_empresa/camadas/dominio/entidades/empresa_entidade.dart';
+import 'package:cadastro_empresa/camadas/dominio/entidades/endereco_entidade.dart';
+import 'package:cadastro_empresa/camadas/dominio/entidades/pessoa_entidade.dart';
+import 'package:cadastro_empresa/camadas/dominio/entidades/pessoa_fisica_entidade.dart';
+import 'package:cadastro_empresa/camadas/dominio/entidades/pessoa_juridica_entidade.dart';
 import 'package:uuid/uuid.dart';
 
 class Sistema {

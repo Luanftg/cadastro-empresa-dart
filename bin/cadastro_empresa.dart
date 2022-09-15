@@ -1,6 +1,6 @@
-import 'package:cadastro_empresa/dao.dart';
+import 'package:cadastro_empresa/camadas/dados/dao.dart';
 
-import 'package:cadastro_empresa/repositorio_padrao.dart';
+import 'package:cadastro_empresa/camadas/dados/fontes_de_dados/repositorio_padrao.dart';
 import 'package:cadastro_empresa/sistema.dart';
 
 void main() {

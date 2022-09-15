@@ -1,4 +1,4 @@
-import 'package:cadastro_empresa/empresa_model.dart';
+import '../dominio/entidades/empresa_entidade.dart';
 
 abstract class DAO {
   Future<void> encontrarUm(String id) async {}
