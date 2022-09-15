@@ -21,8 +21,8 @@ Telefone:       $telefone
   }
 
   static String validarDocumento(String documento) {
-    int cpf = int.parse(documento);
-    while (documento.length != 11 || cpf.isNaN) {
+    int? cpf = int.tryParse(documento);
+    while (documento.length != 11 || cpf == null) {
       print(
           'CPF inválido. Informe uma sequência de 11 digitos sem caracteres especiais');
       documento = stdin.readLineSync()!;

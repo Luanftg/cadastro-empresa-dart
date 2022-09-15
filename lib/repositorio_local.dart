@@ -15,23 +15,23 @@ class RepositorioLocal implements DAO {
 
   @override
   Future<void> adicionar(Empresa content) async {
-    var sink = arquivo.openWrite(mode: FileMode.append);
+    var streamDeArquivo = arquivo.openWrite(mode: FileMode.append);
     registro++;
-    sink.write('\n ${content.toJson()} \n');
-    sink.close();
+    streamDeArquivo.write('\n ${content} \n');
+    streamDeArquivo.close();
   }
 
   @override
   Future<void> deletar(String id) async {
     Stream<String> linhas =
         arquivo.openRead().transform(utf8.decoder).transform(LineSplitter());
-    var sink = arquivo.openWrite(mode: FileMode.append);
+    var streamDeArquivo = arquivo.openWrite(mode: FileMode.append);
     try {
       await for (var linha in linhas) {
         if (linha.contains(id)) {
           for (int i = 0; i <= 8; i++) {
-            sink.write('');
-            sink.close();
+            streamDeArquivo.write('');
+            streamDeArquivo.close();
           }
           print('\n [removida] $linha');
         }
@@ -51,7 +51,7 @@ class RepositorioLocal implements DAO {
       await for (var linha in linhas) {
         print(linha);
       }
-      print('Arquivo fechado.');
+      //print('Arquivo fechado.');
     } catch (e) {
       print('[Error]: $e');
     }

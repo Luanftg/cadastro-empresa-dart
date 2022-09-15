@@ -5,7 +5,7 @@ class Endereco {
   String logradouro;
   String numero;
   String? complemento;
-  String bairo;
+  String bairro;
   String estado;
   String cep;
   String cidade;
@@ -14,7 +14,7 @@ class Endereco {
     required this.logradouro,
     required this.numero,
     this.complemento,
-    required this.bairo,
+    required this.bairro,
     required this.estado,
     required this.cep,
     required this.cidade,
@@ -22,7 +22,7 @@ class Endereco {
 
   @override
   String toString() {
-    return '''$logradouro, $numero, $bairo, $estado, $cep''';
+    return '''$logradouro, $numero, $bairro, $estado, $cep''';
   }
 
   Map<String, dynamic> toMap() {
@@ -30,7 +30,7 @@ class Endereco {
       'logradouro': logradouro,
       'numero': numero,
       'complemento': complemento,
-      'bairo': bairo,
+      'bairro': bairro,
       'estado': estado,
       'cep': cep,
       'cidade': cidade,
@@ -43,7 +43,7 @@ class Endereco {
       numero: map['numero'] as String,
       complemento:
           map['complemento'] != null ? map['complemento'] as String : null,
-      bairo: map['bairo'] as String,
+      bairro: map['bairo'] as String,
       estado: map['estado'] as String,
       cep: map['cep'] as String,
       cidade: map['cidade'] as String,

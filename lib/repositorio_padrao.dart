@@ -28,30 +28,21 @@ class RepositorioPadrao implements DAO {
     }
   }
 
-  // @override
-  // void encontrarUm(String documento) {
-  //   listaEmpresas.forEach((element) {
-  //     var lista =
-  //         (listaEmpresas.where((element) => element.cnpj == documento)).first;
-  //     print(lista);
-  //   });
-  // }
-
   @override
   Future<void> encontrarUm(String documento) async {
     listaEmpresas.forEach((element) {
       if (documento.length == 14) {
         documento = PessoaJuridica.validarDocumento(documento);
         var listaCNPJ =
-            (listaEmpresas.where((element) => element.cnpj == documento)).first;
+            (listaEmpresas.where((element) => element.cnpj == documento));
         print('\n $listaCNPJ');
       } else if (documento.length == 11) {
         documento = PessoaFisica.validarDocumento(documento);
         var listaCPF = (listaEmpresas
-            .where((element) => element.socio.documento == documento)).first;
+            .where((element) => element.socio.documento == documento));
         print('\n $listaCPF');
       } else {
-        print('Informe um numero de domento válido.');
+        print('Informe um número de documento válido.');
         return;
       }
     });

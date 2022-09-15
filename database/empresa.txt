@@ -1,5 +1,4 @@
 
- 
 ID: 3def1610-2ee9-11ed-93f0-0969fe9d9294
 CNPJ: 40.245.842/0001-28     Data Cadastro: 2022-09-07 17:11:21.972802 
 Razão Social:   Luan Fonseca Filmes
@@ -20,3 +19,5 @@ CPF:            278.161.578-19
 Nome Completo:  Maria Helena
 Endereço: Rua Santa Cruz, 2053, Centro, SP, 11660150
 
+
+ {"id":"b0bfb620-3477-11ed-b915-8f3a1867a5df","razaoSocial":"Luiza FOnseca Rosa da Silva","nomeFantasia":"LFRS","cnpj":"76.236.753/0001-62","endereco":{"logradouro":"Rua B","numero":"321","complemento":"casa 5","bairro":"Água Mineral","estado":"PI","cep":"64006440","cidade":"Teresina"},"telefone":"3883 - 1195","criadoEm":1663192418949,"socio":{"nomeIdentificador":"Luiza Fonseca","documento":"143.927.870-95","endereco":{"logradouro":"Rua Antônio Martins Carvalho","numero":"123","complemento":"apto2","bairro":"Jardim Emília","estado":"SP","cep":"12321400","cidade":"Jacareí"}}} 

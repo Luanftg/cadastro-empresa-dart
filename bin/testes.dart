@@ -13,7 +13,7 @@ void main() {
       logradouro: 'Avendia Rui Barbosa',
       numero: '2053',
       complemento: 'casa04',
-      bairo: 'Santana',
+      bairro: 'Santana',
       estado: 'São Paulo',
       cep: '12211-105',
       cidade: 'São José dos Campos');

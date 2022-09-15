@@ -6,9 +6,3 @@ abstract class DAO {
   Future<void> deletar(String id) async {}
   void adicionar(Empresa empresa) {}
 }
-
-
-//   void buscaEmpresaPeloCNPJ() {}
-//   void buscaEmpresaPeloDocumentoDoSocio() {}
-//   void listarEmpresas() {}
-//   void excluirEmpresa() {}

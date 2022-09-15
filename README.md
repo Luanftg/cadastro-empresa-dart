@@ -29,8 +29,8 @@ Toda *empresa* nesse sistema deve ter um sócio associado a ela, que pode ser um
 O sistema ao ser executado deve oferecer as seguintes opções:
 
 - [x] Cadastrar uma nova empresa;
-- [ ] Buscar Empresa cadastrada por CNPJ;
-- [ ] Buscar Empresa por CPF/CNPJ do Sócio;
+- [x] Buscar Empresa cadastrada por CNPJ;
+- [x] Buscar Empresa por CPF/CNPJ do Sócio;
 - [x] Listar Empresas cadastradas em ordem alfabética (baseado na Razão Social);
 - [x] Excluir uma empresa;
 - [x] Sair.
@@ -72,6 +72,18 @@ seguinte formatação:
    2. pacotes: *Uuid* - gerador de ID
    3. Estrutura de armazenamento de dados com ``File class``
 3. Implementação
+
+4. **Correções para 15/09**
+
+- [ ] Formatar campos na impressao:
+  - [ ] cep
+  - [ ] data de cadastro
+  - [ ] endereco - posição
+- [ ] Remover parenteses da empresa retornada : adicionar ``first`` as buscas por documento EM AMBAS AS BUSCAS!
+- [ ] Remover impressão de ID duplicado
+- [ ] Adicionar quebra de linha na mensagem de confirmação da deleção por ID
+- [ ] Adicionar quebra de linha na impressão do rsultado da busca por lista vazia
+- [ ] Adicionar quebra de linha na impressão da mensagem de finalização do Sistema
 
 #### Referências
 

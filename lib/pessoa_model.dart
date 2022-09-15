@@ -24,7 +24,7 @@ class Pessoa {
       return telefone =
           '${telefone.substring(0, 4)} - ${telefone.substring(4)}';
     } else {
-      return '';
+      return telefone;
     }
   }
 
