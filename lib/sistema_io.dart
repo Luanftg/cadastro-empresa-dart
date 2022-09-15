@@ -89,6 +89,10 @@ class SistemaIO {
     );
   }
 
+  static exibe(String mensagem) {
+    stdout.writeln(mensagem);
+  }
+
   static String apresentacao = 'Inicializado Sistema para Cadastro de Empresas';
 
   static String tituloMenuGeralCadastro = '''
@@ -101,6 +105,12 @@ class SistemaIO {
 [Menu Principal] : Informe a opção desejada
 
 ''';
+
+  static erroAoAdicionarEmpresa(String e) {
+    stdout.writeln('[Erro] -> $e - ao tentar salvar Empresa');
+  }
+
+  static String confirmaEmpresaCadastrada = 'Empresa cadastrada com sucesso!';
 
   static String delecaoID = 'Informe o ID da empresa para EXCLUIR do Sistema.';
   static String cnpjEmpresa = "Informe o CNPJ da Empresa:";

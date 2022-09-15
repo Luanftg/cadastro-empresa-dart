@@ -31,7 +31,6 @@ class Sistema {
           break;
         case MenuPrincipal.cadastrar:
           escolha = SistemaIO.menuPessoa();
-
           await cadastrarEmpresa(escolha);
           break;
         case MenuPrincipal.listarTodos:
@@ -117,9 +116,9 @@ class Sistema {
 
     try {
       repo.adicionar(empresa);
-      print('\nEmpresa cadastrada com sucesso!');
+      SistemaIO.exibe(SistemaIO.confirmaEmpresaCadastrada);
     } catch (e) {
-      print(e);
+      SistemaIO.erroAoAdicionarEmpresa(e.toString());
     }
   }
 }
