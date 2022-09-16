@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:cadastro_empresa/camadas/dados/fontes_de_dados/repositorio_local.dart';
+import 'package:cadastro_empresa/camadas/dados/repositorios/repositorio_local.dart';
 import 'package:cadastro_empresa/camadas/dominio/entidades/empresa_entidade.dart';
 import 'package:cadastro_empresa/camadas/dominio/entidades/endereco_entidade.dart';
 import 'package:cadastro_empresa/camadas/dominio/entidades/pessoa_fisica_entidade.dart';

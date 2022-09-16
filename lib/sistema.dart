@@ -40,17 +40,21 @@ class Sistema {
         case MenuPrincipal.deletar:
           print(SistemaIO.delecaoID);
           await repo.deletar(
-            SistemaIO.pergunta(SistemaIO.delecaoID),
+            SistemaIO.pergunta(
+              SistemaIO.delecaoID,
+              tamanho: 36,
+            ),
           );
           break;
         case MenuPrincipal.buscarPorCNPJEmpresa:
           await repo.encontrarUm(
-            SistemaIO.pergunta(SistemaIO.cnpjEmpresa),
+            SistemaIO.pergunta(SistemaIO.cnpjEmpresa,
+                eNumero: true, tamanho: 14),
           );
           break;
         case MenuPrincipal.buscarPorCNPJCPFSocio:
           repo.encontrarUm(
-            SistemaIO.pergunta(SistemaIO.buscaEmpresaporSocio),
+            SistemaIO.pergunta(SistemaIO.buscaEmpresaporSocio, eNumero: true),
           );
           break;
         default:
@@ -73,24 +77,24 @@ class Sistema {
 
       pessoa = PessoaFisica(
         documento: PessoaFisica.validarDocumento(
-          SistemaIO.pergunta(SistemaIO.cpfSocio),
+          SistemaIO.pergunta(SistemaIO.cpfSocio, eNumero: true, tamanho: 11),
         ),
         nomeIdentificador: SistemaIO.pergunta(SistemaIO.nomeSocio),
         endereco: await SistemaControlador.atribuiEndereco(),
         telefone: Pessoa.validarTelefone(
-          SistemaIO.pergunta(SistemaIO.telefoneSocio),
+          SistemaIO.pergunta(SistemaIO.telefoneSocio, eNumero: true),
         ),
       );
       //Se for PESSOA JURIDICA
     } else if (escolha == PessoaMenu.juridica) {
       pessoa = PessoaJuridica(
         documento: PessoaJuridica.validarDocumento(
-          SistemaIO.pergunta(SistemaIO.cnpjEmpresa),
+          SistemaIO.pergunta(SistemaIO.cnpjEmpresa, eNumero: true, tamanho: 14),
         ),
         nomeIdentificador: SistemaIO.pergunta(SistemaIO.razaoSocial),
         nomeFantasia: SistemaIO.pergunta(SistemaIO.nomeFantasia),
         telefone: Pessoa.validarTelefone(
-          SistemaIO.pergunta(SistemaIO.telefoneSocio),
+          SistemaIO.pergunta(SistemaIO.telefoneSocio, eNumero: true),
         ),
         endereco: await SistemaControlador.atribuiEndereco(),
       );
@@ -110,7 +114,7 @@ class Sistema {
       ),
       endereco: await SistemaControlador.atribuiEndereco(),
       telefone: Pessoa.validarTelefone(
-        SistemaIO.pergunta(SistemaIO.telefoneEmpresa),
+        SistemaIO.pergunta(SistemaIO.telefoneEmpresa, eNumero: true),
       ),
       socio: pessoa,
     );

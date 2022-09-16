@@ -7,9 +7,11 @@ class SistemaControlador {
   static Future<Endereco> atribuiEndereco() async {
     String? resultadoConfirmaCep;
     Endereco enderecoViaCep;
-    String numero = SistemaIO.pergunta(SistemaIO.numeroEnderecoEmpresa);
+    String numero =
+        SistemaIO.pergunta(SistemaIO.numeroEnderecoEmpresa, eNumero: true);
     String complemento = SistemaIO.pergunta(SistemaIO.complementoEmpresa);
-    String cep = SistemaIO.pergunta(SistemaIO.cepEmpresa);
+    String cep =
+        SistemaIO.pergunta(SistemaIO.cepEmpresa, eNumero: true, tamanho: 8);
     try {
       enderecoViaCep =
           await CepApi.fetchViaCep(cep, 'json', numero, complemento);
@@ -17,7 +19,8 @@ class SistemaControlador {
       if (resultadoConfirmaCep == '1') {
         enderecoViaCep = Endereco(
           logradouro: SistemaIO.pergunta(SistemaIO.logradouroEmpresa),
-          numero: SistemaIO.pergunta(SistemaIO.numeroEnderecoEmpresa),
+          numero: SistemaIO.pergunta(SistemaIO.numeroEnderecoEmpresa,
+              eNumero: true),
           cidade: SistemaIO.pergunta(SistemaIO.cidadeEmpressa),
           complemento: SistemaIO.pergunta(SistemaIO.complementoEmpresa),
           bairro: SistemaIO.pergunta(SistemaIO.bairroEmpresa),

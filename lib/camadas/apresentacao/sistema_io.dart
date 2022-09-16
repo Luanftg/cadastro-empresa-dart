@@ -31,6 +31,30 @@ class SistemaIO {
     'Pessoa Juridica',
   ];
 
+  static String pergunta(String mensagem, {bool? eNumero, int? tamanho}) {
+    String parametro;
+    do {
+      stdout.writeln(mensagem);
+      parametro = stdin.readLineSync()!;
+      if (eNumero == true) {
+        int.tryParse(parametro) != null ? parametro : parametro = '';
+      }
+
+      if (tamanho != null) {
+        parametro.length == tamanho ? parametro : parametro = '';
+      }
+    } while (parametro.isEmpty);
+    return parametro;
+  }
+  // static String pergunta(String mensagem) {
+  //   String parametro;
+  //   do {
+  //     stdout.writeln(mensagem);
+  //     parametro = stdin.readLineSync()!;
+  //   } while (parametro.isEmpty);
+  //   return parametro;
+  // }
+
   static String? menu(String pergunta, List<String> opcoes,
       [int? maxCaracter]) {
     do {
@@ -140,15 +164,6 @@ class SistemaIO {
   static String encerrar = 'Sistema Finalizado!';
   static String erroApiCep(String e) =>
       'Erro [$e] na chamada da Api.\nInforme os Campos manualmente';
-
-  static String pergunta(String mensagem) {
-    String parametro;
-    do {
-      print(mensagem);
-      parametro = stdin.readLineSync()!;
-    } while (parametro.isEmpty);
-    return parametro;
-  }
 
   static void exibeResultadoCep(Map<String, dynamic> json) {
     stdout.writeln('''
