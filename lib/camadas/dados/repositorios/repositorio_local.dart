@@ -2,11 +2,11 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:cadastro_empresa/camadas/dados/dao.dart';
+import 'package:cadastro_empresa/camadas/dados/repositorios/repositorio.dart';
 
 import '../../dominio/entidades/empresa_entidade.dart';
 
-class RepositorioLocal implements DAO {
+class RepositorioLocal implements Repositorio {
   final File arquivo;
   int registro = 0;
 

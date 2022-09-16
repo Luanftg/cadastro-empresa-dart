@@ -46,35 +46,27 @@ class SistemaIO {
     } while (parametro.isEmpty);
     return parametro;
   }
-  // static String pergunta(String mensagem) {
-  //   String parametro;
-  //   do {
-  //     stdout.writeln(mensagem);
-  //     parametro = stdin.readLineSync()!;
-  //   } while (parametro.isEmpty);
-  //   return parametro;
-  // }
 
-  static String? menu(String pergunta, List<String> opcoes,
-      [int? maxCaracter]) {
+  static String menu(
+    String pergunta,
+    List<String> opcoes,
+  ) {
+    int? escolhaInt;
+    int limite;
     do {
       stdout.writeln(pergunta);
       for (var i = 0; i < opcoes.length; i++) {
         stdout.writeln('[$i] -> ${opcoes[i]} ');
       }
+      limite = opcoes.length - 1;
       escolha = stdin.readLineSync()!;
-
-      if (int.tryParse(escolha) != null) {
-        int escolhaParse = int.parse(escolha);
-        if (escolhaParse >= opcoes.length) {
-          escolha = '';
-        }
-      }
-    } while (escolha == '' || int.tryParse(escolha) == null);
+      escolhaInt = int.tryParse(escolha);
+      if (escolhaInt != null) {}
+    } while (escolha.isEmpty || escolha.length > 1 || escolhaInt! > limite);
     return escolha;
   }
 
-  static MenuPrincipal converteRespostaMenu(String? respostaMenu) {
+  static MenuPrincipal converteRespostaMenu(String respostaMenu) {
     if (respostaMenu == '0') {
       return MenuPrincipal.encerrar;
     } else if (respostaMenu == '1') {
@@ -90,24 +82,21 @@ class SistemaIO {
     }
   }
 
-  static PessoaMenu? converteRespostaMenuCadastroDePessoa(
-      String? respostaMenu) {
+  static PessoaMenu converteRespostaMenuCadastroDePessoa(String? respostaMenu) {
     if (respostaMenu == '0') {
       return PessoaMenu.fisica;
-    } else if (respostaMenu == '1') {
-      return PessoaMenu.juridica;
     } else {
-      return null;
+      return PessoaMenu.juridica;
     }
   }
 
-  static Enum? menuPrincipal() {
+  static MenuPrincipal menuPrincipal() {
     return converteRespostaMenu(
-      menu(tituloMenuGeralCadastro, listaDeOpcoesMenuPrincipal),
+      menu(tituloMenuPrincipal, listaDeOpcoesMenuPrincipal),
     );
   }
 
-  static Enum? menuPessoa() {
+  static PessoaMenu menuPessoa() {
     return converteRespostaMenuCadastroDePessoa(
       menu(tituloMenuPrincipal, listaDeOpcoesMenuCadastroPessoa),
     );
@@ -127,7 +116,6 @@ class SistemaIO {
   static String tituloMenuPrincipal = '''
 
 [Menu Principal] : Informe a opção desejada
-
 ''';
 
   static erroAoAdicionarEmpresa(String e) {
@@ -169,7 +157,7 @@ class SistemaIO {
     stdout.writeln('''
 
 Confirme as informações para o Endereço informado
-CEP:          ${json['cep'].toString().substring(0, 5)} - ${json['cep'].toString().substring(5)}
+CEP:          ${json['cep']}
 Logradouro:   ${json['logradouro']}
 Bairro:       ${json['bairro']}
 Cidade:       ${json['cidade']}

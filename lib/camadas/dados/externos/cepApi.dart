@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:cadastro_empresa/camadas/sistema/sistema_controlador_endereco.dart';
 import 'package:http/http.dart' as http;
 
 import '../../dominio/entidades/endereco_entidade.dart';
@@ -25,7 +26,7 @@ class CepApi {
     String bairro = json['bairro'];
     String estado = json['uf'];
     String cidade = json['localidade'];
-
+    cep = SistemaControladorEndereco.formataCepValidado(cep);
     Endereco endereco = Endereco(
       logradouro: logradouro,
       numero: numero,

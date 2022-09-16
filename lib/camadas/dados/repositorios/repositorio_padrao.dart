@@ -1,15 +1,15 @@
-import 'package:cadastro_empresa/camadas/dados/dao.dart';
+import 'package:cadastro_empresa/camadas/dados/repositorios/repositorio.dart';
 
 import '../../dominio/entidades/empresa_entidade.dart';
 import '../../dominio/entidades/pessoa_fisica_entidade.dart';
 import '../../dominio/entidades/pessoa_juridica_entidade.dart';
 
-class RepositorioPadrao implements DAO {
-  List<Empresa> listaEmpresas = [];
+class RepositorioPadrao implements Repositorio {
+  static List<Empresa> listaEmpresas = [];
   @override
   void adicionar(Empresa empresa) {
     listaEmpresas.contains(empresa)
-        ? print('Empresa já cadastrada na lista')
+        ? print('[Erro] -> Empresa já cadastrada na lista')
         : listaEmpresas.add(empresa);
   }
 

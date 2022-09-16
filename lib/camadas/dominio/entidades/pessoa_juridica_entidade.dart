@@ -16,10 +16,13 @@ class PessoaJuridica extends Pessoa {
 
   static String validarDocumento(String documento) {
     int? cnpj = int.tryParse(documento);
-    while (documento.length != 14 || cnpj == null) {
+
+    if (documento.length != 14 || cnpj == null) {
       print(
           'CNPJ inválido. Informe uma sequência de 14 digitos sem caracteres especiais');
-      documento = stdin.readLineSync()!;
+      do {
+        documento = stdin.readLineSync()!;
+      } while (documento.isEmpty);
     }
     return '${documento.substring(0, 2)}.${documento.substring(2, 5)}.${documento.substring(5, 8)}/0001-${documento.substring(12)}';
   }

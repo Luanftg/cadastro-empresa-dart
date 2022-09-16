@@ -76,13 +76,13 @@ seguinte formatação:
 4. **Correções para 15/09**
 
 - [ ] Formatar campos na impressao:
-  - [ ] cep
+  - [x] cep
   - [ ] data de cadastro
   - [ ] endereco - posição
 - [ ] Remover parenteses da empresa retornada : adicionar ``first`` as buscas por documento EM AMBAS AS BUSCAS!
-- [ ] Remover impressão de ID duplicado
+- [x] Remover impressão de ID duplicado
 - [ ] Adicionar quebra de linha na mensagem de confirmação da deleção por ID
-- [ ] Adicionar quebra de linha na impressão do rsultado da busca por lista vazia
+- [ ] Adicionar quebra de linha na impressão do resultado da busca por lista vazia
 - [ ] Adicionar quebra de linha na impressão da mensagem de finalização do Sistema
 
 #### Referências

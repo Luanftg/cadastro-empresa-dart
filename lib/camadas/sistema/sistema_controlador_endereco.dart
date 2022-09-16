@@ -1,9 +1,9 @@
-import 'package:cadastro_empresa/camadas/apresentacao/sistema_io.dart';
+import 'package:cadastro_empresa/camadas/sistema/sistema_io.dart';
 
 import '../dados/externos/cepApi.dart';
 import '../dominio/entidades/endereco_entidade.dart';
 
-class SistemaControlador {
+class SistemaControladorEndereco {
   static Future<Endereco> atribuiEndereco() async {
     String? resultadoConfirmaCep;
     Endereco enderecoViaCep;
@@ -15,7 +15,7 @@ class SistemaControlador {
     try {
       enderecoViaCep =
           await CepApi.fetchViaCep(cep, 'json', numero, complemento);
-      SistemaControlador.confirmaResultadoEndereco(enderecoViaCep);
+      resultadoConfirmaCep = confirmaResultadoEndereco(enderecoViaCep);
       if (resultadoConfirmaCep == '1') {
         enderecoViaCep = Endereco(
           logradouro: SistemaIO.pergunta(SistemaIO.logradouroEmpresa),
@@ -25,7 +25,7 @@ class SistemaControlador {
           complemento: SistemaIO.pergunta(SistemaIO.complementoEmpresa),
           bairro: SistemaIO.pergunta(SistemaIO.bairroEmpresa),
           estado: SistemaIO.pergunta(SistemaIO.unidadeFederativaEmpresa),
-          cep: cep,
+          cep: formataCepValidado(cep),
         );
       }
       return enderecoViaCep;
@@ -41,5 +41,9 @@ class SistemaControlador {
       'Informe:',
       ['Para confirmar', 'Informar os campos manualmente'],
     );
+  }
+
+  static String formataCepValidado(String cep) {
+    return '${cep.toString().substring(0, 5)} - ${cep.substring(5)}';
   }
 }
