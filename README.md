@@ -56,34 +56,38 @@ seguinte formatação:
 
 ### Solução
 
-1. Abstração
-   1. Criação dos 'contratos':
-      1. ``abstract class`` Sistema
-      2. ``abstract class`` Objeto de Acesso aos Dados
-   2. Implementação dos 'contratos'
-      1. ``class`` Sistema_Cadastro_Empresa ``implements`` Sistema
-      2. ``class`` Lista_Objeto_Acesso_Dados ``implements`` Objeto de Acesso aos Dados
-   3. Criação dos 'modelos'
-      1. ``class`` Pessoa_Fisica ``extends`` Pessoa
-      2. ``class`` Pessoa Jurídica ``extends`` Pessoa
-      3. ``class`` Empresa
-2. Testes
-   1. Estrutura das classes
-   2. pacotes: *Uuid* - gerador de ID
-   3. Estrutura de armazenamento de dados com ``File class``
-3. Implementação
+![abstração do Sistema](abstracao.png)
 
-4. **Correções para 15/09**
-
-- [ ] Formatar campos na impressao:
-  - [x] cep
-  - [ ] data de cadastro
-  - [ ] endereco - posição
-- [ ] Remover parenteses da empresa retornada : adicionar ``first`` as buscas por documento EM AMBAS AS BUSCAS!
-- [x] Remover impressão de ID duplicado
-- [ ] Adicionar quebra de linha na mensagem de confirmação da deleção por ID
-- [ ] Adicionar quebra de linha na impressão do resultado da busca por lista vazia
-- [ ] Adicionar quebra de linha na impressão da mensagem de finalização do Sistema
+1. Abstração das Entidades
+   1. Pessoa Física
+   2. Pessoa Jurídica
+   3. Endereço
+   4. Empresa
+2. Criação das camadas
+   1. **Sistema**
+      1. SistemaIO = resposável por se comunicar com usuário e validar os dados das entradas
+      2. SistemaControladorEmpresa = responsável por instanciar um objeto da classe Empresa à partir da camada SistemIO
+      3. SistemaControladorPessoa = responsável por instanciar um objto da classe Pessoa à partir da camada SistemIO
+      4. SistemaControladorEndereco = responsável por instanciar um objeto da classe Endereço à partir das camadas SistemIO e externos ViaCepApi
+   2. **Dominio**
+      1. Entidades
+         1. Empresa
+            1. Pessoa
+               1. Pessoa Física
+                  1. Endereço
+               2. Pessoa Jurídica
+                  1. Endereço
+            2. Endereço
+   3. **Dados**
+      1. Externos
+         - [x] ViaCepApi = responsável por buscar dados de um endereço à partir de um CEP válido
+      2. Fonte de Dados
+         - [ ] Persistência local com Classe nativa ``File``
+      3. Repositório
+         - [x] Repositório padrão = implementação do contrato de repositório à partir de memória volátil
+         - [ ] Repositório local = implementação do contrato de repositório à partir da Classe ``File``
+3. Testes
+   - [x] Testes Unitários das entidades
 
 #### Referências
 
