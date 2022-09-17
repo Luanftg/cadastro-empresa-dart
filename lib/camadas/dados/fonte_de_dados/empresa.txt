@@ -19,5 +19,16 @@ CPF:            278.161.578-19
 Nome Completo:  Maria Helena
 Endereço: Rua Santa Cruz, 2053, Centro, SP, 11660150
 
+ ID: 9f956c30-35eb-11ed-b69f-5bb073598110
+CNPJ: 40.245.842/0001-28     Data Cadastro: 2022-09-16 15:16:02.937724 
+Razão Social:   Luan Fonseca
+Nome Fantasia:  Luan ftg
+Endereço: Rua Santa Cruz, 340, Centro, SP, 11660 - 150
+Telefone:       3883 - 1195
+SÓCIO
+CPF:            352.142.008-62
+Nome Completo:  Luan
+Endereço:       Avenida Rui Barbosa, 2053, Vila Rossi, SP, 12211 - 105
+Telefone:       99721 - 3383
 
- {"id":"b0bfb620-3477-11ed-b915-8f3a1867a5df","razaoSocial":"Luiza FOnseca Rosa da Silva","nomeFantasia":"LFRS","cnpj":"76.236.753/0001-62","endereco":{"logradouro":"Rua B","numero":"321","complemento":"casa 5","bairro":"Água Mineral","estado":"PI","cep":"64006440","cidade":"Teresina"},"telefone":"3883 - 1195","criadoEm":1663192418949,"socio":{"nomeIdentificador":"Luiza Fonseca","documento":"143.927.870-95","endereco":{"logradouro":"Rua Antônio Martins Carvalho","numero":"123","complemento":"apto2","bairro":"Jardim Emília","estado":"SP","cep":"12321400","cidade":"Jacareí"}}} 
+     

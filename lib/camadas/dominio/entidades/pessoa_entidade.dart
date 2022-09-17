@@ -7,11 +7,13 @@ class Pessoa {
   String nomeIdentificador;
   String documento;
   Endereco endereco;
+  String telefone;
 
   Pessoa({
     required this.nomeIdentificador,
     required this.documento,
     required this.endereco,
+    required this.telefone,
   });
 
   static void validarDocumento(String documento) {}
@@ -30,22 +32,19 @@ class Pessoa {
   }
 
   @override
-  String toString() =>
-      'Pessoa(nomeIdentificador: $nomeIdentificador, documento: $documento, endereco: $endereco)';
-
-  Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      'nomeIdentificador': nomeIdentificador,
-      'documento': documento,
-      'endereco': endereco.toMap(),
-    };
-  }
+  String toString() => '''
+Nome completo: $nomeIdentificador
+Documento: $documento 
+Endereco: $endereco
+Telefone: $telefone
+''';
 
   factory Pessoa.fromMap(Map<String, dynamic> map) {
     return Pessoa(
       nomeIdentificador: map['nomeIdentificador'] as String,
       documento: map['documento'] as String,
       endereco: Endereco.fromMap(map['endereco'] as Map<String, dynamic>),
+      telefone: map['telefone'] as String,
     );
   }
 
@@ -53,4 +52,13 @@ class Pessoa {
 
   factory Pessoa.fromJson(String source) =>
       Pessoa.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'nomeIdentificador': nomeIdentificador,
+      'documento': documento,
+      'endereco': endereco.toMap(),
+      'telefone': telefone,
+    };
+  }
 }

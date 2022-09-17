@@ -122,6 +122,13 @@ class SistemaIO {
     stdout.writeln('[Erro] -> $e - ao tentar salvar Empresa');
   }
 
+  static String configuraRepositorio = '''
+Você deseja persistir os dados localmente ?
+[Sim] -> O cadastro de uma empresa será armezenado em um arquivo local em 'camadas/dados/fonte_de_dados/'
+[Não] -> Os dados serão perdidos ao encerrar o programa.
+''';
+
+  static List<String> opcoesRepositorio = ['Sim', 'Não'];
   static String confirmaEmpresaCadastrada = 'Empresa cadastrada com sucesso!';
 
   static String delecaoID = 'Informe o ID da empresa para EXCLUIR do Sistema.';

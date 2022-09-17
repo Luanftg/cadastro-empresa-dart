@@ -28,11 +28,11 @@ class Empresa {
   @override
   String toString() {
     return '''
+CNPJ: $cnpj     Data Cadastro: $criadoEm
 ID: $id
-CNPJ: $cnpj     Data Cadastro: $criadoEm 
 Razão Social:   $razaoSocial
 Nome Fantasia:  $nomeFantasia
-Endereço: $endereco
+Endereço:       $endereco
 Telefone:       $telefone
 SÓCIO
 $socio
@@ -63,7 +63,7 @@ $socio
       criadoEm: map['criadoEm'] != null
           ? DateTime.fromMillisecondsSinceEpoch(map['criadoEm'] as int)
           : null,
-      socio: Pessoa.fromMap(map['socio'] as Map<String, dynamic>),
+      socio: Pessoa.fromMap(map['socio']),
     );
   }
 

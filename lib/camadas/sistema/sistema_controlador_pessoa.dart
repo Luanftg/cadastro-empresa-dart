@@ -22,8 +22,11 @@ class SistemaControladorPessoa {
       case PessoaMenu.juridica:
         return PessoaJuridica(
           documento: PessoaJuridica.validarDocumento(
-            SistemaIO.pergunta(SistemaIO.cnpjEmpresa,
-                eNumero: true, tamanho: 14),
+            SistemaIO.pergunta(
+              SistemaIO.cnpjEmpresa,
+              eNumero: true,
+              tamanho: 14,
+            ),
           ),
           nomeIdentificador: SistemaIO.pergunta(SistemaIO.razaoSocial),
           nomeFantasia: SistemaIO.pergunta(SistemaIO.nomeFantasia),

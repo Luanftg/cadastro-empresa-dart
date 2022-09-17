@@ -34,13 +34,13 @@ class RepositorioPadrao implements Repositorio {
     listaEmpresas.forEach((element) {
       if (documento.length == 14) {
         documento = PessoaJuridica.validarDocumento(documento);
-        var listaCNPJ =
-            (listaEmpresas.where((element) => element.cnpj == documento));
+        var listaCNPJ = (listaEmpresas
+            .where((element) => element.cnpj == documento)).toList().first;
         print('\n $listaCNPJ');
       } else if (documento.length == 11) {
         documento = PessoaFisica.validarDocumento(documento);
-        var listaCPF = (listaEmpresas
-            .where((element) => element.socio.documento == documento));
+        var listaCPF = (listaEmpresas.where(
+            (element) => element.socio.documento == documento)).toList().first;
         print('\n $listaCPF');
       } else {
         print('Informe um número de documento válido.');

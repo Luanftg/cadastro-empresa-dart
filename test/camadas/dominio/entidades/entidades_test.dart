@@ -16,10 +16,10 @@ main() {
       cidade: 'Barbacena',
     );
     Pessoa luan = Pessoa(
-      nomeIdentificador: 'Luan Fonseca',
-      documento: '84499357098',
-      endereco: enderecoLuan,
-    );
+        nomeIdentificador: 'Luan Fonseca',
+        documento: '84499357098',
+        endereco: enderecoLuan,
+        telefone: '997213383');
     expect(luan, isNotNull);
   });
   test('Espero que a entidade Endereço não seja nula', () {
@@ -35,6 +35,7 @@ main() {
       nomeIdentificador: 'Luan Fonseca',
       documento: '84499357098',
       endereco: enderecoLuan,
+      telefone: '997213383',
     );
     expect(enderecoLuan, isNotNull);
   });

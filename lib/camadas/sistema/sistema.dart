@@ -1,4 +1,6 @@
 import 'dart:io';
+import 'package:cadastro_empresa/camadas/dados/repositorios/repositorio_local.dart';
+import 'package:cadastro_empresa/camadas/dados/repositorios/repositorio_padrao.dart';
 import 'package:cadastro_empresa/camadas/sistema/sistema_controlador_empresa.dart';
 import 'package:cadastro_empresa/camadas/sistema/sistema_controlador_pessoa.dart';
 import 'package:cadastro_empresa/camadas/dados/externos/cepApi.dart';
@@ -11,12 +13,19 @@ class Sistema {
   static late Enum? escolhaMenu;
   static late PessoaMenu escolhaPessoa;
 
-  final Repositorio repo;
+  static final Repositorio repo = RepositorioPadrao();
   CepApi viaCepApi = CepApi();
   late Pessoa pessoa;
   late Empresa empresa;
 
-  Sistema({required this.repo});
+  // static void configuracao() {
+  //   String respostaRepositorio = SistemaIO.menu(
+  //       SistemaIO.configuraRepositorio, SistemaIO.opcoesRepositorio);
+  //   respostaRepositorio == '0'
+  //       ? Sistema.repo = RepositorioLocal(
+  //           arquivo: File('lib/camadas/dados/fonte_de_dados/empresa.json'))
+  //       : Sistema.repo = RepositorioPadrao();
+  // }
 
   Future<void> inicializar() async {
     SistemaIO.exibe(SistemaIO.apresentacao);
@@ -71,25 +80,6 @@ class Sistema {
 
     pessoa = await SistemaControladorPessoa.atibuirPessoa(escolhaPessoa);
     empresa = await SistemaControladorEmpresa.atribuiEmpresa(pessoa);
-
-    // // Se Pessoa Fisica
-    // if (escolha == PessoaMenu.fisica) {
-    //   //Informações da Pessoa Fisica
-    //   stdout.writeln(SistemaIO.cadastroSocio);
-    //   stdout.writeln(SistemaIO.endereco);
-
-    //   pessoa = await SistemaControladorPessoa.atibuirPessoa(PessoaMenu.fisica);
-    //   //Se for PESSOA JURIDICA
-    // } else if (escolha == PessoaMenu.juridica) {
-    //   pessoa =
-    //       await SistemaControladorPessoa.atibuirPessoa(PessoaMenu.juridica);
-    // } else {
-    //   stdout.write(SistemaIO.erroOpcao);
-    // }
-
-    // //DADOS DA EMPRESA
-    // stdout.writeln("Dados da empresa");
-    // empresa = await SistemaControladorEmpresa.atribuiEmpresa(pessoa);
 
     try {
       repo.adicionar(empresa);

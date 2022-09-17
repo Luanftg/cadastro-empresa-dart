@@ -8,7 +8,7 @@
             "name": "cadastro-empresa",
             "request": "launch",
             "type": "dart",
-            "program": "./bin/cadastro_empresa.dart"
+            "program": "./bin/cadastro_empresa.dart",
         }
     ]
 }

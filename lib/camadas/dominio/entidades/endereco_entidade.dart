@@ -43,7 +43,7 @@ class Endereco {
       numero: map['numero'] as String,
       complemento:
           map['complemento'] != null ? map['complemento'] as String : null,
-      bairro: map['bairo'] as String,
+      bairro: map['bairro'] as String,
       estado: map['estado'] as String,
       cep: map['cep'] as String,
       cidade: map['cidade'] as String,
